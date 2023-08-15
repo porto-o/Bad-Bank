@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
-import "../index.css"
-import defaultProfilePhoto from "../assets/octocat.png"
+import "../index.css";
+import defaultProfilePhoto from "../assets/octocat.png";
 
 export default function NavBar() {
   const { activeUser } = useContext(DataContext);
@@ -11,7 +11,7 @@ export default function NavBar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <NavLink className="navbar-brand custom-brand" to={"/"} >
+          <NavLink className="navbar-brand custom-brand" to={"/"} title="Home">
             Bad Bank
           </NavLink>
           <button
@@ -30,9 +30,10 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeclassname="active"
-                  exact="true"
+                  activeClassName="active"
+                  exact={true}
                   to={"/"}
+                  title="Home"
                 >
                   Home
                 </NavLink>
@@ -40,8 +41,9 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeclassname="active"
+                  activeClassName="active"
                   to={"/deposit"}
+                  title="Deposit"
                 >
                   Deposit
                 </NavLink>
@@ -49,8 +51,9 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeclassname="active"
+                  activeClassName="active"
                   to={"/withdraw"}
+                  title="Withdraw"
                 >
                   Withdraw
                 </NavLink>
@@ -58,8 +61,9 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeclassname="active"
+                  activeClassName="active"
                   to={"/create-account"}
+                  title="Create account"
                 >
                   Create account
                 </NavLink>
@@ -67,8 +71,9 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeclassname="active"
+                  activeClassName="active"
                   to={"/all-data"}
+                  title="All Data"
                 >
                   All Data
                 </NavLink>
@@ -77,12 +82,16 @@ export default function NavBar() {
           </div>
           {activeUser && (
             <div className="profile-photo-container">
-               <p className="greeting">Hola, {activeUser.name}</p>
-            <img
-              src={activeUser.photo ? URL.createObjectURL(activeUser.photo) : defaultProfilePhoto}
-              alt={activeUser.name}
-              className="profile-photo-navbar"
-            />
+              <p className="greeting">Hola, {activeUser.name}</p>
+              <img
+                src={
+                  activeUser.photo
+                    ? URL.createObjectURL(activeUser.photo)
+                    : defaultProfilePhoto
+                }
+                alt={activeUser.name}
+                className="profile-photo-navbar"
+              />
             </div>
           )}
         </div>
