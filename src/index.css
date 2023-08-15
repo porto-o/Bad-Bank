@@ -1,0 +1,40 @@
+/* In your CSS file or style block */
+.btn-custom {
+  background-color: #6c757d; /* Change this to the desired color */
+  border-color: #6c757d; /* Change this to the desired color */
+  color: #fff; /* Text color for the button */
+}
+
+/* If you want to change the color on hover/focus */
+.btn-custom:hover,
+.btn-custom:focus {
+  background-color: #5a6268; /* Change this to a slightly different shade */
+  border-color: #545b62; /* Change this to a slightly different shade */
+  color: #fff; /* Text color for the button on hover/focus */
+}
+
+.profile-photo {
+  width: 50px; /* Set the desired width */
+  height: auto; /* Automatically adjust height to maintain aspect ratio */
+}
+
+/* Add this CSS in your stylesheet to style the profile photo in the navbar */
+.profile-photo-container {
+  display: flex;
+  align-items: center;
+}
+/* Style for the greeting */
+.greeting {
+  color: white;
+  font-size: 16px;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
+/* Style for the profile photo in the navbar */
+.profile-photo-navbar {
+  width: 32px; /* Adjust the width to your preference */
+  height: 32px; /* Adjust the height to your preference */
+  border-radius: 50%;
+  object-fit: cover;
+}

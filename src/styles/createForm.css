@@ -1,0 +1,83 @@
+.create-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .form-control {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .form-check-label {
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .form-control {
+      font-size: 14px;
+    }
+    .form-check-label {
+      font-size: 12px;
+    }
+    .btn-primary {
+      font-size: 14px;
+    }
+  }
+  
+  .create-account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .create-account-title {
+    font-size: 36px;
+    margin-bottom: 20px; /* Adjust margin to create spacing */
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  @media (max-width: 768px) {
+    .create-account-title {
+      font-size: 28px;
+    }
+  }
+  
