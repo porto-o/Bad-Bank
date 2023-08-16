@@ -82,7 +82,7 @@ export default function NavBar() {
                 <NavLink
                   className="nav-link"
                   activeclassname="active"
-                  to="https://www.youtube.com/watch?v=gqJgwwsxc4U&t"
+                  to="https://www.youtube.com/watch?v=yuZo2GxhzM0"
                   title="How to use it? (Spanish)"
                   target="_blank"
                 >
