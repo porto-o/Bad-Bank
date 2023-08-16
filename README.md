@@ -1,10 +1,10 @@
 # Bad Bank Application
 
 Welcome to the Bad Bank application repository! This project is designed to provide a comprehensive banking experience for users, allowing them to manage their finances, create accounts, make deposits, withdrawals, and more. The application is built using the React framework and utilizes the Vite development setup for efficient development and Hot Module Replacement (HMR). 
+<!-- Embed the YouTube video -->
+## Click to watch the video
+[![Bad Bank Introduction](https://img.youtube.com/vi/gqJgwwsxc4U/0.jpg)](https://www.youtube.com/watch?v=gqJgwwsxc4U)
 
-![Alt text](image.png)
-![Alt text](image-1.png)
-![Alt text](image-2.png)
 ## Technologies Used
 
 - React: A popular JavaScript library for building user interfaces.
