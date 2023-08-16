@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useContext, useEffect, useState } from "react";
+import { set, useForm } from "react-hook-form";
 import { DataContext } from "../../context/DataContext";
 import Success from "./successModal";
 
@@ -11,13 +11,44 @@ const MoneyOpsForm = ({ action }) => {
     handleSubmit,
     formState: { errors, isDirty },
     watch,
+    trigger, // Add the trigger function
   } = useForm();
+
   const { activeUser, shareData, setShareData } = useContext(DataContext);
   const storedBalance = parseFloat(activeUser.balance);
+  const [tempBalance, setTempBalance] = useState(storedBalance);
   const [balance, setBalance] = useState(storedBalance);
-  const [enteredAmount] = useState("");
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
+  const enteredAmount = watch("amount");
+
+  useEffect(() => {
+    if (enteredAmount) {
+      trigger("amount"); // Trigger validation for the "amount" field while typing
+    }
+
+    const parsedAmount = parseFloat(enteredAmount);
+
+    if (isNaN(parsedAmount)) {
+      setTempBalance(storedBalance);
+      return;
+    }
+
+    if (action === "withdraw" && parsedAmount > storedBalance) {
+      setTempBalance(storedBalance);
+      return;
+    } else if (action === "deposit" && parsedAmount < 0) {
+      setTempBalance(storedBalance);
+      return;
+    }
+
+    const newTempBalance =
+      action === "deposit"
+        ? storedBalance + parsedAmount
+        : storedBalance - parsedAmount;
+
+    setTempBalance(newTempBalance);
+  }, [enteredAmount, trigger, action, storedBalance]);
   const onSubmit = handleSubmit((data) => {
     const amount = parseFloat(data.amount);
     const newBalance =
@@ -44,7 +75,10 @@ const MoneyOpsForm = ({ action }) => {
       <div className="atm-machine">
         <div className="screen">
           <h2 className="display-4">ATM Cash Machine</h2>
-          <p className="balance">Balance: ${balance.toFixed(2)}</p>
+          <p className="balance">Current balance: ${balance}</p>
+          <p className="balance">
+            Balance after operation: ${tempBalance.toFixed(2)}
+          </p>
         </div>
         <form onSubmit={onSubmit} noValidate className="text-center">
           <div className="input-group mb-3">

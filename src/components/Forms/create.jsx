@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { DataContext } from "../../context/DataContext";
 import Success from "./successModal";
@@ -6,9 +6,17 @@ import Success from "./successModal";
 import "../../styles/createForm.css"; // Import your custom CSS styles for the form
 
 const CreateForm = () => {
+  const { switchUser } = useContext(DataContext);
   const [account, setAccount] = useState("Create account");
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const { shareData, setShareData } = useContext(DataContext);
+
+  useEffect(() => {
+    if (shareData.length > 0) {
+      const newUser = shareData[shareData.length - 1];
+      switchUser(newUser.id);
+    }
+  }, [shareData, switchUser]);
 
   const {
     register,
@@ -16,6 +24,7 @@ const CreateForm = () => {
     formState: { errors, isDirty },
     reset,
     watch,
+    trigger,
   } = useForm();
 
   const onSubmit = handleSubmit((data) => {
@@ -24,7 +33,6 @@ const CreateForm = () => {
       0
     );
     const nextId = highestId + 1;
-      console.log(data.photo[0])
     const newUser = {
       id: nextId,
       name: data.name,
@@ -54,6 +62,7 @@ const CreateForm = () => {
             {...register("name", {
               required: "Name required",
             })}
+            onBlur={() => trigger("name")}
           />
           {errors.name && (
             <p className="invalid-feedback">{errors.name.message}</p>
@@ -72,6 +81,7 @@ const CreateForm = () => {
                 message: "Invalid email format",
               },
             })}
+            onBlur={() => trigger("email")}
           />
           {errors.email && (
             <p className="invalid-feedback">{errors.email.message}</p>
@@ -90,6 +100,7 @@ const CreateForm = () => {
                 message: "Password must be at least 8 characters",
               },
             })}
+            onBlur={() => trigger("password")}
           />
           {errors.password && (
             <p className="invalid-feedback">{errors.password.message}</p>
@@ -108,6 +119,7 @@ const CreateForm = () => {
               validate: (value) =>
                 value === watch("password") || "Passwords do not match",
             })}
+            onBlur={() => trigger("confirmPassword")}
           />
           {errors.confirmPassword && (
             <p className="invalid-feedback">{errors.confirmPassword.message}</p>
@@ -125,6 +137,7 @@ const CreateForm = () => {
             {...register("terms", {
               required: "You must accept our terms and conditions",
             })}
+            onBlur={() => trigger("terms")}
           />
           <label className="form-check-label">
             Accept our terms and conditions

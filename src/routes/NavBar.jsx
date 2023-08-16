@@ -30,8 +30,8 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeClassName="active"
-                  exact={true}
+                  activeclassname="active"
+                  exact={'true'}
                   to={"/"}
                   title="Home"
                 >
@@ -41,7 +41,7 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeClassName="active"
+                  activeclassname="active"
                   to={"/deposit"}
                   title="Deposit"
                 >
@@ -51,7 +51,7 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeClassName="active"
+                  activeclassname="active"
                   to={"/withdraw"}
                   title="Withdraw"
                 >
@@ -61,7 +61,7 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeClassName="active"
+                  activeclassname="active"
                   to={"/create-account"}
                   title="Create account"
                 >
@@ -71,11 +71,22 @@ export default function NavBar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  activeClassName="active"
+                  activeclassname="active"
                   to={"/all-data"}
                   title="All Data"
                 >
                   All Data
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeclassname="active"
+                  to="https://www.youtube.com/watch?v=gqJgwwsxc4U&t"
+                  title="How to use it? (Spanish)"
+                  target="_blank"
+                >
+                  How to use it? (Spanish)
                 </NavLink>
               </li>
             </ul>

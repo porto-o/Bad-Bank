@@ -47,7 +47,6 @@ const Home = () => {
             className="img-fluid rounded-circle mx-1"
             style={{ width: "80px", height: "80px" }}
           />
-          {/* Add more images as needed */}
         </div>
       </div>
     </div>
