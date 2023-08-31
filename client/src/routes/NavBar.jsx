@@ -78,7 +78,7 @@ export default function NavBar() {
                   All Data
                 </NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink
                   className="nav-link"
                   activeclassname="active"
@@ -88,7 +88,7 @@ export default function NavBar() {
                 >
                   How to use it? (Spanish)
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </div>
           {activeUser && (
