@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function LoadingModal({ show, loading, message }) {
+const LoadingModal = ({ show, loading, message }) => {
   const [modalShow, setModalShow] = useState(show);
 
   useEffect(() => {
