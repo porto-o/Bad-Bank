@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function LoadingModal({ show, loading, message }) {
+function LoadingModal({ show, loading, message }) {
   const [modalShow, setModalShow] = useState(show);
 
   useEffect(() => {
@@ -56,3 +56,5 @@ export default function LoadingModal({ show, loading, message }) {
     </div>
   );
 }
+
+export default LoadingModal;

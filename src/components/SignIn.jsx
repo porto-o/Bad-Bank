@@ -2,10 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
-import LoadingModal from "./general/loading";
 import Welcome from "./Welcome";
 import { BsGoogle } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
+import LoadingModal from "./general/loading";
 
 const SignIn = () => {
   // global context
