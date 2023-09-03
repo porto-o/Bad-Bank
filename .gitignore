@@ -7,9 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+src/api/axios.js
+
 node_modules
 dist
-package-lock.json
 dist-ssr
 *.local
 

@@ -1,40 +1,47 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./errorPage.jsx";
-import Deposit from "./components/deposit.jsx";
-import Withdraw from "./components/withdraw.jsx";
-import CreateAccount from "./components/createAccount.jsx";
-import App from "./App.jsx";
-import Home from "./components/home.jsx";
-import AllData from "./components/allData.jsx";
-import "./index.css"
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import Deposit from "./components/customer/Deposit";
+import Withdraw from "./components/customer/Withdraw";
+import History from "./components/customer/History";
+import Home from "./components/customer/Home";
+import NavBar from "./components/customer/NavBar";
+import ErrorPage from "./components/Error.jsx";
+import { AuthProvider } from "./context/auth.context";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <SignUp />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/signin",
+    errorElement: <ErrorPage />,
+    element: <SignIn />,
+  },
+  {
+    path: "/me",
+    element: <NavBar />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: "/me",
         element: <Home />,
       },
       {
-        path: "/deposit",
+        path: "deposit",
         element: <Deposit />,
       },
       {
-        path: "/withdraw",
+        path: "withdraw",
         element: <Withdraw />,
       },
       {
-        path: "/create-account",
-        element: <CreateAccount />,
-      },
-      {
-        path: "/all-data",
-        element: <AllData />,
+        path: "history",
+        element: <History />,
       },
     ],
   },
@@ -42,6 +49,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
