@@ -5,3 +5,12 @@
   justify-content: center;
   height: 100vh;
 }
+
+/* history.css */
+
+/* Add the black-text class to set text color to black */
+.black-text {
+  color: #000; /* Black color code */
+}
+
+/* Customize other styles as needed */

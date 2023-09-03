@@ -37,7 +37,8 @@ export const AuthProvider = ({ children }) => {
   const myMoney = async (type, amount, user) => {
     const res = await myMoneyRequest(type, amount, user);
     // save it in the user state
-    setUser(res.data);
+    console.log (res.data)
+    setUser({ ...user, balance: res.data.balance, transactions: res.data.transactions });
 
     return res;
   };
@@ -45,8 +46,8 @@ export const AuthProvider = ({ children }) => {
   const getHistory = async (user) => {
     const res = await historyRequest(user);
     // actualiza el estado de user en su propiedad de transactions
-    setUser({...user, transactions: res.data});
-    return res
+    setUser({ ...user, transactions: res.data });
+    return res;
   };
 
   const logOut = async () => {
@@ -56,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     // change to / with react router dom
     return res;
-  }
+  };
 
   return (
     <AuthContext.Provider
@@ -66,7 +67,7 @@ export const AuthProvider = ({ children }) => {
         signin,
         myMoney,
         getHistory,
-        logOut
+        logOut,
       }}
     >
       {children}

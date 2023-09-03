@@ -4,9 +4,9 @@ import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
 import LoadingModal from "./general/loading";
 import Welcome from "./Welcome";
-import "../styles/signup.css"; // Import a CSS file for additional styling
 import { BsGoogle } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
+import "../styles/signup.css"; // Import a CSS file for additional styling
 
 const SignUp = () => {
   // global context
@@ -42,14 +42,19 @@ const SignUp = () => {
       {user ? (
         <Navigate to="/me" />
       ) : (
-        <div className="container d-flex justify-content-center align-items-center vh-100">
-          <div className="col-md-6 text-center">
-            <h2>Welcome to</h2>
-            <h1 className="app-title">Bad Bank</h1>
-            <Welcome />
-          </div>
-          <div className="col-md-6">
-            <form
+        <div className="signup-container">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="signup-content">
+                  <h1>Welcome to</h1>
+                  <h1>Bad Bank</h1>
+                  <Welcome />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="signup-form">
+                <form
               onSubmit={handleSubmit(onSubmit)}
               className="needs-validation"
               noValidate
@@ -151,21 +156,25 @@ const SignUp = () => {
                 Create Account
               </button>
             </form>
+                  <div className="mt-4 text-center">
+                    Already have an account? &nbsp;
+                    <Link to="/signin" className="me-2">
+                      Sign in
+                    </Link>
+                  </div>
+                  <hr />
 
-            <div className="mt-4 text-center">
-              Already have an account? &nbsp;
-              <Link to="/signin" className="me-2">
-                Sign in
-              </Link>
-            </div>
-            <hr />
-
-            <div className="text-center">
-              <p>Or create an account using:</p>
-               <BsGoogle />
-              <button className="btn btn-light">
-                <BiLogoFacebook />
-              </button>
+                  <div className="text-center">
+                    <p>Or create an account using:</p>
+                    <button className="btn btn-light">
+                      <BsGoogle />
+                    </button>
+                    <button className="btn btn-light">
+                      <BiLogoFacebook />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -10,13 +10,13 @@ const Welcome = () => {
               src="https://www.svgrepo.com/show/9509/bank.svg"
               alt="bank-welcome"
               className="img-fluid"
-              width="500"
-              height="500"
+              width="1000"
+              height="1000"
               style={{
                 display: "block",
                 marginLeft: "auto",
                 marginRight: "auto",
-                width: "50%",
+                width: "60%",
               }}
             />
           </div>

@@ -2,22 +2,21 @@ import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { useAuth } from "../../context/auth.context";
+import Footer from "./Footer";
 
 const NavBar = () => {
-
   const { logOut } = useAuth();
   const navigate = useNavigate();
 
   const signOut = async () => {
     await logOut();
     navigate("/signin");
-
-  }
+  };
 
   return (
     <>
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-up">
           <div className="container">
             <NavLink
               className="navbar-brand custom-brand"
@@ -83,15 +82,17 @@ const NavBar = () => {
                     History
                   </NavLink>
                 </li>
-                {/* Add the logout icon */}
+                {/* Add the logout icon up to the right of the navbar*/}
                 <li className="nav-item">
                   <NavLink
                     className="nav-link"
-                    title="Logout"
+                    activeclassname="active"
+                    exact="true"
+                    to={"/signin"}
+                    title="Sign Out"
+                    onClick={signOut}
                   >
-                    <IoIosLogOut 
-                      onClick={signOut}
-                    />
+                    <IoIosLogOut />
                   </NavLink>
                 </li>
               </ul>
@@ -100,6 +101,7 @@ const NavBar = () => {
         </nav>
       </div>
       <Outlet />
+      <Footer />
     </>
   );
 };

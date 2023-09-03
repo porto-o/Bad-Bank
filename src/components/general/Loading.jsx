@@ -46,7 +46,7 @@ const LoadingModal = ({ show, loading, message }) => {
             ) : (
               <div className="success">
                 <div className="alert alert-success" role="alert">
-                  Success!
+                  Success operation!
                 </div>
               </div>
             )}

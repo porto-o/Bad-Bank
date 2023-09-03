@@ -1,46 +1,35 @@
 import React from "react";
+import { useAuth } from "../../context/auth.context";
 
 const Home = () => {
+  // get the name of the user from context
+  const { user } = useAuth();
+
+  // Check if there are transactions before displaying the last one
+  const lastTransaction =
+    user.transactions.length > 0
+      ? user.transactions[user.transactions.length - 1]
+      : null;
+
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="card bg-transparent border-0">
         <div className="card-body text-center">
-          <h1 className="card-title display-4 fw-bold">Welcome to Bad Bank!</h1>
-          <p className="card-text lead text-justify">
-            Embark on a Journey to Transform Your Financial Future. Here at Bad
-            Bank, we believe in empowering you to take control of your finances
-            and achieve your dreams.
-          </p>
-          <p className="card-text text-justify">
-            Whether you're saving for a new home, planning your dream vacation,
-            or investing for a secure retirement, Bad Bank is your trusted
-            partner on your financial journey.
-          </p>
-          <p className="card-text text-justify">
-            Discover our user-friendly tools, personalized advice, and
-            innovative solutions that will help you reach your financial goals
-            faster and with confidence.
-          </p>
-        </div>
-        <div className="d-flex justify-content-center align-items-center p-3">
-          <img
-            src="http://economyria.com/wp-content/uploads/2021/01/bad-bank.jpg" // Replace with actual image URL
-            alt="Image 1"
-            className="img-fluid rounded-circle mx-1"
-            style={{ width: "80px", height: "80px" }}
-          />
-          <img
-            src="https://im.rediff.com/news/2021/jan/bad-loans-o.jpg?w=670&h=900" // Replace with actual image URL
-            alt="Image 2"
-            className="img-fluid rounded-circle mx-1"
-            style={{ width: "80px", height: "80px" }}
-          />
-          <img
-            src="https://www.iasgyan.in//ig-uploads/images//image03615.jpg" // Replace with actual image URL
-            alt="Image 3"
-            className="img-fluid rounded-circle mx-1"
-            style={{ width: "80px", height: "80px" }}
-          />
+          <h1 className="card-title display-4 fw-bold">
+            Welcome to Bad Bank,
+            <span className="text-success"> {user.username}</span>!
+          </h1>
+          <h4 className="">
+            Your current balance is: {""}
+            <span className="text-success">${user.balance}</span>
+          </h4>
+          {lastTransaction && (
+            <h5 className="card-text">
+              Your last operation was a{" "}
+              <span className="text-success">{lastTransaction.type}</span> of{" "}
+              <span className="text-success">${lastTransaction.amount}</span>
+            </h5>
+          )}
         </div>
       </div>
     </div>
