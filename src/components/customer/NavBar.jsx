@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { useAuth } from "../../context/auth.context";
-import Footer from "./Footer";
 
 const NavBar = () => {
   const { logOut } = useAuth();
@@ -16,7 +15,7 @@ const NavBar = () => {
   return (
     <>
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-up">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
             <NavLink
               className="navbar-brand custom-brand"
@@ -98,10 +97,12 @@ const NavBar = () => {
               </ul>
             </div>
           </div>
-        </nav>
+        </nav>{" "}
+        <div>
+          <Outlet 
+          />
+        </div>
       </div>
-      <Outlet />
-      <Footer />
     </>
   );
 };

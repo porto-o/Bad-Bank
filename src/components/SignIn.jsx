@@ -4,13 +4,12 @@ import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
 import Welcome from "./Welcome";
 import { BsGoogle } from "react-icons/bs";
-import { BiLogoFacebook } from "react-icons/bi";
 import LoadingModal from "./general/loading";
 import "../styles/signup.css"; // Import a CSS file for additional styling
 
 const SignIn = () => {
   // global context
-  const { signin, user } = useAuth();
+  const { signin, user, googleSignIn } = useAuth();
 
   // things for the modal
   const [isLoading, setIsLoading] = React.useState(false);
@@ -22,6 +21,20 @@ const SignIn = () => {
     handleSubmit,
     formState: { errors, isDirty },
   } = useForm();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setIsLoading(true);
+      setShowModal(true);
+      await googleSignIn();
+      setIsLoading(false);
+      setShowModal(false);
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false);
+      setModalMessage(error.response.data);
+    }
+  }
 
   const onSubmit = async (data) => {
     try {
@@ -39,9 +52,8 @@ const SignIn = () => {
 
   return (
     <>
-      {user ? (
-        <Navigate to="/me" />
-      ) : (
+      {user && <Navigate to="/me" />}
+     
         <div className="signup-container">
           <div className="container">
             <div className="row">
@@ -119,11 +131,8 @@ const SignIn = () => {
 
                   <div className="text-center">
                     <p>Or sign in using:</p>
-                    <button className="btn btn-light me-2">
+                    <button className="btn btn-light me-2" onClick={handleGoogleSignIn}>
                       <BsGoogle />
-                    </button>
-                    <button className="btn btn-light">
-                      <BiLogoFacebook />
                     </button>
                   </div>
                 </div>
@@ -131,7 +140,7 @@ const SignIn = () => {
             </div>
           </div>
         </div>
-      )}
+      
       <LoadingModal
         show={showModal}
         loading={isLoading}

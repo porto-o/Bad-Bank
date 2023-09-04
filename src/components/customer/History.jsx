@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../../styles/history.css"
+import "../../styles/history.css";
 import { useAuth } from "../../context/auth.context.jsx";
 
 const History = () => {
@@ -19,7 +19,7 @@ const History = () => {
   const [endDate, setEndDate] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemsPerPage = 8;
+  const itemsPerPage = 5;
 
   // Sort transactions by date in descending order (most recent first)
   const sortedTransactions = [...user.transactions].sort((a, b) => {
@@ -28,11 +28,11 @@ const History = () => {
 
   // Filter transactions based on the selected option and date range
   const filteredTransactions = sortedTransactions
-    .filter(transaction => {
+    .filter((transaction) => {
       if (filter === "all") return true;
       return transaction.type === filter;
     })
-    .filter(transaction => {
+    .filter((transaction) => {
       if (!startDate || !endDate) return true;
       const transactionDate = new Date(transaction.date);
       return transactionDate >= startDate && transactionDate <= endDate;
@@ -58,13 +58,16 @@ const History = () => {
   };
 
   return (
-    <div className="container all-data">
+    <div
+      className="container all-data"
+      style={{
+        marginTop: "75px"
+      }}
+    >
       <h1 className="display-4 fw-bold">
         Hello, <span className="text-success">{user.username}</span>!
       </h1>
-      <p className="lead">
-        Here is your transaction history with Bad Bank:
-      </p>
+      <p className="lead">Here is your transaction history with Bad Bank:</p>
       <div className="filter">
         <label>Filter by transaction type:</label>
         <select
@@ -79,7 +82,7 @@ const History = () => {
           {/* Add more filter options as needed */}
         </select>
       </div>
-      <hr/>
+      <hr />
       <p className="lead">
         Showing {currentTransactions.length} of {filteredTransactions.length}{" "}
       </p>
@@ -125,7 +128,12 @@ const History = () => {
       <nav>
         <ul className="pagination">
           {Array.from({ length: totalPages }).map((_, index) => (
-            <li key={index} className={`page-item ${index + 1 === currentPage ? "active" : ""}`}>
+            <li
+              key={index}
+              className={`page-item ${
+                index + 1 === currentPage ? "active" : ""
+              }`}
+            >
               <button
                 className="btn btn-custom" // Set text color to black
                 onClick={() => handlePageChange(index + 1)}

@@ -1,6 +1,14 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest, loginRequest, logoutRequest } from "../api/auth";
 import { myMoneyRequest, historyRequest } from "../api/money";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../api/firebase.js";
 
 export const AuthContext = createContext();
 
@@ -37,8 +45,12 @@ export const AuthProvider = ({ children }) => {
   const myMoney = async (type, amount, user) => {
     const res = await myMoneyRequest(type, amount, user);
     // save it in the user state
-    console.log (res.data)
-    setUser({ ...user, balance: res.data.balance, transactions: res.data.transactions });
+    console.log(res.data);
+    setUser({
+      ...user,
+      balance: res.data.balance,
+      transactions: res.data.transactions,
+    });
 
     return res;
   };
@@ -59,6 +71,38 @@ export const AuthProvider = ({ children }) => {
     return res;
   };
 
+  const googleSignUp = async () => {
+    const provider = new GoogleAuthProvider();
+    const res = await signInWithPopup(auth, provider);
+    console.log(res)
+    // data needed
+    // email
+    // displayName
+    // accessToken
+    const user = {
+      email: res.user.email,
+      username: res.user.displayName,
+      password: res.user.accessToken,
+    }
+    await signup(user)
+  };
+
+  const googleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    const res = await signInWithPopup(auth, provider);
+    console.log(res)
+    // data needed
+    // email
+    // displayName
+    // accessToken
+    const user = {
+      email: res.user.email,
+      username: res.user.displayName,
+      password: res.user.accessToken,
+    }
+    await signin(user)
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -68,6 +112,8 @@ export const AuthProvider = ({ children }) => {
         myMoney,
         getHistory,
         logOut,
+        googleSignUp,
+        googleSignIn
       }}
     >
       {children}

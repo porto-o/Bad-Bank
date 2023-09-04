@@ -1,16 +1,15 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
 import LoadingModal from "./general/loading";
 import Welcome from "./Welcome";
 import { BsGoogle } from "react-icons/bs";
-import { BiLogoFacebook } from "react-icons/bi";
-import "../styles/signup.css"; // Import a CSS file for additional styling
+import "../styles/signup.css"; 
 
 const SignUp = () => {
   // global context
-  const { signup, user } = useAuth();
+  const { signup, user, googleSignUp } = useAuth();
 
   // things for the modal
   const [isLoading, setIsLoading] = React.useState(false);
@@ -23,6 +22,19 @@ const SignUp = () => {
     watch,
     formState: { errors, isDirty },
   } = useForm();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setIsLoading(true);
+      setShowModal(true);
+      await googleSignUp();
+      setIsLoading(false);
+      setShowModal(false);
+    } catch (error) {
+      setIsLoading(false);
+      setModalMessage(error.response.data);
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -39,9 +51,8 @@ const SignUp = () => {
 
   return (
     <>
-      {user ? (
-        <Navigate to="/me" />
-      ) : (
+    {user && <Navigate to="/me" />}
+      
         <div className="signup-container">
           <div className="container">
             <div className="row">
@@ -166,11 +177,8 @@ const SignUp = () => {
 
                   <div className="text-center">
                     <p>Or create an account using:</p>
-                    <button className="btn btn-light">
+                    <button className="btn btn-light" onClick={handleGoogleSignIn}>
                       <BsGoogle />
-                    </button>
-                    <button className="btn btn-light">
-                      <BiLogoFacebook />
                     </button>
                   </div>
                 </div>
@@ -178,7 +186,7 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-      )}
+      
       <LoadingModal
         show={showModal}
         loading={isLoading}
