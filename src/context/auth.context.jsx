@@ -1,12 +1,9 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest, loginRequest, logoutRequest } from "../api/auth";
-import { myMoneyRequest, historyRequest } from "../api/money";
+import { myMoneyRequest, historyRequest, transferRequest  } from "../api/money";
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
-  signOut,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../api/firebase.js";
 
@@ -74,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   const googleSignUp = async () => {
     const provider = new GoogleAuthProvider();
     const res = await signInWithPopup(auth, provider);
-    console.log(res)
+    console.log(res);
     // data needed
     // email
     // displayName
@@ -83,14 +80,14 @@ export const AuthProvider = ({ children }) => {
       email: res.user.email,
       username: res.user.displayName,
       password: res.user.accessToken,
-    }
-    await signup(user)
+    };
+    await signup(user);
   };
 
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     const res = await signInWithPopup(auth, provider);
-    console.log(res)
+    console.log(res);
     // data needed
     // email
     // displayName
@@ -99,8 +96,20 @@ export const AuthProvider = ({ children }) => {
       email: res.user.email,
       username: res.user.displayName,
       password: res.user.accessToken,
-    }
-    await signin(user)
+    };
+    await signin(user);
+  };
+
+  const transfer = async (amount, user, email) => {
+    console.log("context user: ", user)
+    const res = await transferRequest(amount, user, email);
+    // save it in the user state
+    setUser({
+      ...user,
+      balance: res.data.balance,
+      transactions: res.data.transactions,
+    });
+    return res;
   };
 
   return (
@@ -113,7 +122,8 @@ export const AuthProvider = ({ children }) => {
         getHistory,
         logOut,
         googleSignUp,
-        googleSignIn
+        googleSignIn,
+        transfer
       }}
     >
       {children}

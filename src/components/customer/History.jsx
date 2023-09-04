@@ -79,6 +79,7 @@ const History = () => {
           <option value="deposit">Deposits</option>
           <option value="withdrawal">Withdrawals</option>
           <option value="transfer">Transfers</option>
+          <option value="received">Received</option>
           {/* Add more filter options as needed */}
         </select>
       </div>
@@ -96,7 +97,18 @@ const History = () => {
             <th scope="col">Hour</th>
             {
               // for transfers only remitte
-              filter === "transfer" && <th scope="col">Remitte</th>
+              filter === "transfer" && (
+                <th scope="col">Destinatary</th>
+              )
+            
+            }
+            {
+              // for received only remitte
+              filter === "received" && (
+                <th scope="col">From</th>
+              )
+            
+            
             }
           </tr>
         </thead>
@@ -106,8 +118,13 @@ const History = () => {
               <th className="black-text">{transaction.type}</th>
               <td className="black-text">
                 {transaction.type === "deposit"
-                  ? `+ $${transaction.amount}`
-                  : `- $${transaction.amount}`}
+                  ? "+ " + transaction.amount
+                  : transaction.type === "withdrawal"
+                  ? "- " + transaction.amount
+                  : transaction.type === "transfer"
+                  ? "- " + transaction.amount
+                  : "+ " + transaction.amount
+                }
               </td>
               <td className="black-text">
                 {
@@ -121,6 +138,18 @@ const History = () => {
                   new Date(transaction.date).toLocaleTimeString()
                 }
               </td>
+              {
+                // for transfers only remitte
+                filter === "transfer" && (
+                  <td className="black-text">{transaction.email}</td>
+                )
+              }
+              {
+                // for received only remitte
+                filter === "received" && (
+                  <td className="black-text">{transaction.email}</td>
+                )
+              }
             </tr>
           ))}
         </tbody>

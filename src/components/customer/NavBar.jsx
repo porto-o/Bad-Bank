@@ -75,6 +75,17 @@ const NavBar = () => {
                     className="nav-link"
                     activeclassname="active"
                     exact="true"
+                    to={"transfer"}
+                    title="Transfer"
+                  >
+                    Transfer
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    activeclassname="active"
+                    exact="true"
                     to={"history"}
                     title="History"
                   >

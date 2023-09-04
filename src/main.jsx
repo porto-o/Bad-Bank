@@ -10,6 +10,7 @@ import Home from "./components/customer/Home";
 import NavBar from "./components/customer/NavBar";
 import ErrorPage from "./components/Error.jsx";
 import { AuthProvider } from "./context/auth.context";
+import Transfer from "./components/customer/Forms/Transfer";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         path: "history",
         element: <History />,
       },
+      {
+        path: "transfer",
+        element: <Transfer />,
+      }
     ],
   },
 ]);

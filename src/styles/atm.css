@@ -16,6 +16,11 @@
   margin-bottom: 15px;
   font-size: 18px;
 }
+.key.btn-transfer {
+  background-color: #ff4500; /* Button color for btn-transfer */
+  color: #fff; /* Text color for btn-transfer */
+}
+
 
 .keypad {
   display: grid;
